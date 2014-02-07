@@ -6,15 +6,24 @@ a reverse proxy for serving etherpad-lite via HTTPS.
 
 ## Usage
 
+Basic usage
+
+```
+  class { 'etherpad':
+```
+
+
+Example with a admin user, to use `/admin`
+
 ```
   class { 'etherpad':
       etherpad_users => {
-        user1 => {    username => "test",
-                      password => "test",
-                      is_admin => "true"
-                                  }
+        user1 => {
+            password => "test",
+            is_admin => "true"
+           }
           }
-       }
+         }
 ```
 ### Other class parameters
 
