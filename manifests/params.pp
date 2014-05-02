@@ -3,7 +3,7 @@
 #
 class etherpad::params {
   $etherpad_title                  = "Etherpad"
-  $etherpad_root                   = "/srv/etherpad"
+  $etherpad_root                   = "/opt/etherpad"
   $etherpad_favicon                = "favicon.ico"
   $etherpad_session_key            = "changeme"
   $etherpad_database_type          = "dirty"

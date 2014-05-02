@@ -9,7 +9,7 @@ a reverse proxy for serving etherpad-lite via HTTPS.
 Basic usage
 
 ```
-  class { 'etherpad':
+  class { 'etherpad': }
 ```
 
 
@@ -31,7 +31,6 @@ TODO: document class parameters
 
 ## Dependencies
 
-    puppetlabs-nodejs
     puppetlabs/apt
     puppetlabs/stdlib
 

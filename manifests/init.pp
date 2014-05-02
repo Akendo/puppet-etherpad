@@ -47,10 +47,10 @@ class etherpad(
   $etherpad_abiword                = $etherpad::params::etherpad_abiword,
 ) inherits etherpad::params {
 
-  class { 'etherpad::dependencies': }
+  class { 'etherpad::packages': }
 
   class { 'etherpad::setup':
-    require => Class['etherpad::dependencies'],
+    require => Class['etherpad::packages'],
   }
 
   file { "${etherpad_root}/settings.json":
@@ -65,7 +65,7 @@ class etherpad(
   service { "etherpad":
     ensure => running,
     enable => true,
-    require => [ Class["etherpad::dependencies"], Class['etherpad::setup'], File["${etherpad_root}/settings.json"] ],
-    subscribe => [ Class["etherpad::dependencies"], Class['etherpad::setup'], File["${etherpad_root}/settings.json"] ],
+    require => [ Class["etherpad::packages"], Class['etherpad::setup'], File["${etherpad_root}/settings.json"] ],
+    subscribe => [ Class["etherpad::packages"], Class['etherpad::setup'], File["${etherpad_root}/settings.json"] ],
   }
 } # Class:: etherpad

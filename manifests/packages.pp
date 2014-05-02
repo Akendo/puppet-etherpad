@@ -1,7 +1,9 @@
-class etherpad::dependencies {
-  class { 'nodejs':
-    version     => '0.10.25-1chl1~precise1',
-    manage_repo => true,
+class etherpad::packages {
+
+  include apt
+  apt::ppa { 'ppa:chris-lea/node.js': } ->
+  package { "nodejs":
+    ensure => installed,
   }
 
   if !defined(Package['gzip']) {
