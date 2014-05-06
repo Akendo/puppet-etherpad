@@ -5,6 +5,14 @@ class etherpad::packages {
   package { "nodejs":
     ensure => installed,
   }
+  apt::source { 'etherpad-lite':
+    # location   => $etherpad_repo_url,
+    location    => 'http://192.168.200.201',
+    repos       => 'main',
+    key         => '3E43106D',
+    key_server  => 'pgp.mit.edu',
+    include_src => false
+  }
 
   if !defined(Package['gzip']) {
     package { 'gzip':

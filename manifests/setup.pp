@@ -31,10 +31,14 @@ class etherpad::setup {
     owner => $etherpad_user,
     group => $etherpad_user,
     mode => 0755,
-  } ->
-  package { "etherpad":
+   } #->
+  package { "etherpad-lite":
     ensure => installed,
   }
+
+  # package { "etherpad-lite":
+  #   ensure => installed,
+  # }
 
   # exec { 'etherpad-clone':
   #   path => '/bin:/usr/bin',
