@@ -6,8 +6,7 @@ class etherpad::packages {
     ensure => installed,
   }
   apt::source { 'etherpad-lite':
-    # location   => $etherpad_repo_url,
-    location    => 'http://192.168.200.201',
+    location    => 'http://apt.akendo.eu/etherpad',
     repos       => 'main',
     key         => '3E43106D',
     key_server  => 'pgp.mit.edu',
