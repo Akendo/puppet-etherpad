@@ -3,7 +3,7 @@
 #
 class etherpad::params {
   $etherpad_title                  = "Etherpad"
-  $etherpad_root                   = "/srv/etherpad"
+  $etherpad_root                   = "/opt/etherpad"
   $etherpad_favicon                = "favicon.ico"
   $etherpad_session_key            = "changeme"
   $etherpad_database_type          = "dirty"
@@ -24,7 +24,7 @@ class etherpad::params {
   $etherpad_disable_ip_logging     = false
   $etherpad_edit_only              = false
   $etherpad_max_age                = 21600
-  $etherpad_users                  = UNDEF
+  $etherpad_users                  = undef
   $etherpad_sources                = "git://github.com/ether/etherpad-lite.git"
   $etherpad_branch                 = "master"
   $etherpad_abiword                = false

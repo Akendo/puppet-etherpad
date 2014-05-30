@@ -6,8 +6,24 @@ a reverse proxy for serving etherpad-lite via HTTPS.
 
 ## Usage
 
+Basic usage
+
 ```
-  class { 'etherpad-lite': }
+  class { 'etherpad': }
+```
+
+
+Example with a admin user, to use `/admin`
+
+```
+  class { 'etherpad':
+      etherpad_users => {
+        user1 => {
+            password => "test",
+            is_admin => "true"
+           }
+          }
+         }
 ```
 ### Other class parameters
 
@@ -15,7 +31,8 @@ TODO: document class parameters
 
 ## Dependencies
 
-TODO: add dependencies ...
+    puppetlabs/apt
+    puppetlabs/stdlib
 
 ## Contribute
 

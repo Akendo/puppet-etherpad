@@ -1,6 +1,16 @@
-class etherpad::dependencies {
-  class { 'nodejs':
-    version => 'v0.10.15',
+class etherpad::packages {
+
+  include apt
+  apt::ppa { 'ppa:chris-lea/node.js': } ->
+  package { "nodejs":
+    ensure => installed,
+  }
+  apt::source { 'etherpad-lite':
+    location    => 'http://apt.akendo.eu/etherpad',
+    repos       => 'main',
+    key         => '3E43106D',
+    key_server  => 'pgp.mit.edu',
+    include_src => false
   }
 
   if !defined(Package['gzip']) {

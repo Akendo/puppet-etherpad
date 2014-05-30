@@ -7,50 +7,54 @@ class etherpad::setup {
 
   user { $etherpad_user:
     ensure   => present,
-    shell    => '/bin/bash',
+    shell    => '/bin/false',
     password => '*',
     home     => $etherpad_root,
     comment  => $etherpad_comment,
     system   => true
-  }
-
+  } ->
   file { '/etc/init.d/etherpad':
     ensure => file,
     content => template("etherpad/init.erb"),
     owner => "root",
     group => "root",
     mode => 0755,
-  }
-
+  } ->
   file { $etherpad_root:
     ensure => directory,
     owner => $etherpad_user,
     group => $etherpad_user,
     mode => 0755,
-  }
-
+  } ->
   file { "/var/log/etherpad":
     ensure => directory,
     owner => $etherpad_user,
     group => $etherpad_user,
     mode => 0755,
+   } #->
+  package { "etherpad-lite":
+    ensure => installed,
   }
 
-  exec { 'etherpad-clone':
-    path => '/bin:/usr/bin',
-    unless => "[ -d '${etherpad_root}/.git' ]",
-    require => File[$etherpad_root],
-    command => "git clone ${etherpad_sources} ${etherpad_root}",
-    user => $etherpad_user,
-    group => $etherpad_user,
-  }
+  # package { "etherpad-lite":
+  #   ensure => installed,
+  # }
 
-  exec { "etherpad-upgrade":
-    path => "/bin:/usr/bin",
-    onlyif => "bash -c 'cd ${etherpad_root}; git fetch; git diff HEAD..origin/${etherpad_branch} | grep -q ^---'",
-    command => "bash -c 'cd ${etherpad_root}; git checkout origin/${etherpad_branch}'",
-    require => Exec['etherpad-clone'],
-    user => $etherpad_user,
-    group => $etherpad_user
-  }
+  # exec { 'etherpad-clone':
+  #   path => '/bin:/usr/bin',
+  #   unless => "[ -d '${etherpad_root}/.git' ]",
+  #   require => File[$etherpad_root],
+  #   command => "git clone ${etherpad_sources} ${etherpad_root}",
+  #   user => $etherpad_user,
+  #   group => $etherpad_user,
+  # }
+
+  # exec { "etherpad-upgrade":
+  #   path => "/bin:/usr/bin",
+  #   onlyif => "bash -c 'cd ${etherpad_root}; git fetch; git diff HEAD..origin/${etherpad_branch} | grep -q ^---'",
+  #   command => "bash -c 'cd ${etherpad_root}; git checkout origin/${etherpad_branch}'",
+  #   require => Exec['etherpad-clone'],
+  #   user => $etherpad_user,
+  #   group => $etherpad_user
+  # }
 }

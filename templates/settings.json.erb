@@ -88,6 +88,7 @@
 
   /* Users for basic authentication. is_admin = true gives access to /admin.
      If you do not uncomment this, /admin will not be available! */
+<% if @etherpad_users %>
   "users": {
 <%- user_names = @etherpad_users.keys.sort -%>
 <%- user_names.each do |user_name| -%>
@@ -97,7 +98,7 @@
     }<%= "," unless user_name == user_names.last %>
 <%- end -%>
   },
-
+<% end %>
   // restrict socket.io transport methods
   "socketTransportProtocols" : ["xhr-polling", "jsonp-polling", "htmlfile"],
 
